@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB02Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Kategori">
+    <Key>
+      <PropertyRef Name="katId" />
+    </Key>
+    <Property Name="katId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="katAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Sepet">
+    <Key>
+      <PropertyRef Name="cartId" />
+    </Key>
+    <Property Name="cartId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SepetUrun">
+    <Key>
+      <PropertyRef Name="cartitemId" />
+    </Key>
+    <Property Name="cartitemId" Type="int" Nullable="false" />
+    <Property Name="cartitemName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Table">
+    <Key>
+      <PropertyRef Name="musteriId" />
+    </Key>
+    <Property Name="musteriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="musteriAdsoyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="musteriMail" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Urun">
+    <Key>
+      <PropertyRef Name="urunId" />
+    </Key>
+    <Property Name="urunId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunAdi" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="urunKatId" Type="int" Nullable="false" />
+    <Property Name="urunFiyat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Sepet_ToTable">
+    <End Role="Table" Type="Self.Table" Multiplicity="1" />
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Table">
+        <PropertyRef Name="musteriId" />
+      </Principal>
+      <Dependent Role="Sepet">
+        <PropertyRef Name="cartId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SepetUrun_ToTable">
+    <End Role="Sepet" Type="Self.Sepet" Multiplicity="1" />
+    <End Role="SepetUrun" Type="Self.SepetUrun" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Sepet">
+        <PropertyRef Name="cartId" />
+      </Principal>
+      <Dependent Role="SepetUrun">
+        <PropertyRef Name="cartitemId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urun_ToKategori">
+    <End Role="Kategori" Type="Self.Kategori" Multiplicity="1" />
+    <End Role="Urun" Type="Self.Urun" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kategori">
+        <PropertyRef Name="katId" />
+      </Principal>
+      <Dependent Role="Urun">
+        <PropertyRef Name="urunKatId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Urun_UrunSepet">
+    <End Role="SepetUrun" Type="Self.SepetUrun" Multiplicity="1" />
+    <End Role="Urun" Type="Self.Urun" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="SepetUrun">
+        <PropertyRef Name="cartitemId" />
+      </Principal>
+      <Dependent Role="Urun">
+        <PropertyRef Name="urunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB02ModelStoreContainer">
+    <EntitySet Name="Kategori" EntityType="Self.Kategori" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sepet" EntityType="Self.Sepet" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SepetUrun" EntityType="Self.SepetUrun" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Table" EntityType="Self.Table" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Urun" EntityType="Self.Urun" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Sepet_ToTable" Association="Self.FK_Sepet_ToTable">
+      <End Role="Table" EntitySet="Table" />
+      <End Role="Sepet" EntitySet="Sepet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SepetUrun_ToTable" Association="Self.FK_SepetUrun_ToTable">
+      <End Role="Sepet" EntitySet="Sepet" />
+      <End Role="SepetUrun" EntitySet="SepetUrun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urun_ToKategori" Association="Self.FK_Urun_ToKategori">
+      <End Role="Kategori" EntitySet="Kategori" />
+      <End Role="Urun" EntitySet="Urun" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Urun_UrunSepet" Association="Self.FK_Urun_UrunSepet">
+      <End Role="SepetUrun" EntitySet="SepetUrun" />
+      <End Role="Urun" EntitySet="Urun" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

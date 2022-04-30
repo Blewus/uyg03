@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="b22c2346aa624992a494950b9ec406ff" Name="Diagram1" ZoomLevel="128">
+        <EntityTypeShape EntityType="DB02Model.Kategori" Width="1.5" PointX="1.125" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB02Model.Sepet" Width="1.5" PointX="3.625" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB02Model.SepetUrun" Width="1.5" PointX="6.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB02Model.Musteri" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB02Model.Urun" Width="1.5" PointX="4.75" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="DB02Model.FK_Urun_ToKategori" ManuallyRouted="false" />
+        <AssociationConnector Association="DB02Model.FK_Sepet_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="DB02Model.FK_SepetUrun_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="DB02Model.FK_Urun_UrunSepet" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
