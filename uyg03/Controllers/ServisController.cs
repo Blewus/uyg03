@@ -226,5 +226,22 @@ namespace uyg03.Controllers
             return sonuc;
         }
         #endregion
+
+        [HttpPost]
+        [Route("api/sepet")]
+        public SonucModel SepetEkle(SepetUrunModel model)
+        {
+            SepetUrun yeni = new SepetUrun();
+            yeni.cartitemName = model.cartitemName;
+            yeni.cartitemId = model.cartitemId;
+            db.SepetUrun.Add(yeni);
+
+            db.SaveChanges();
+
+            sonuc.islem = true;
+            sonuc.mesaj = "Sepete Eklendi...";
+            return sonuc;
+        }
+
     }
 }
